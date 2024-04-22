@@ -12,9 +12,10 @@ export const authToken = async (req, res, next) => {
     if (!verifyToken) {
       return res.status(401).json("token not found");
     }
-    const userVerify = await users.findById(verifyToken.id);
+    const userVerify = await users.findById(verifyToken.id,{password:0});
+    // console.log(userVerify);
     if (!userVerify) {
-      return res.status(401).json("user not found");
+    return res.status(401).json("user not found");
     }
     //    console.log(userVerify);
     //    console.log(verifyToken);

@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
+import config from './config.js';
 
 const dataBase = async() => {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3', {
+        await mongoose.connect(config.connection, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });

@@ -27,7 +27,7 @@ export const singIn = async (req, res) => {
   }
 };
 export const singUp = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const { username, email, password, roles } = req.body;
 
@@ -38,16 +38,16 @@ export const singUp = async (req, res) => {
     });
     // Verificar si el rol no existe, y asginar user por defecto
     if (roles) {
-      // undefined es falsy entonces es false
       const arrayRoles = await rols.find({ name: { $in: roles } }, "_id");
       newUser.roles = arrayRoles;
     } else {
+      // undefined es falsy entonces es false
       const userRole = await rols.findOne({ name: "user" }, "_id");
       newUser.roles = [userRole._id];
     }
     //Guardando a los usuarios
     const saveUsers = await newUser.save();
-    console.log(saveUsers);
+    // console.log(saveUsers);
     // Configuracion JsonWebToken
     const token = jsonwebtoken.sign({ id: newUser._id }, config.secrect, {
       expiresIn: "1d",

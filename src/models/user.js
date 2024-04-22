@@ -22,11 +22,11 @@ const userSchema = new mongoose.Schema({
     versionKey: false
 }
 )
-userSchema.statics.encryptPassword = async (password) => {
+userSchema.statics.encryptPassword = async (password) => { // encriptar contraseña
     const salt = await bcrypt.genSalt(10)
     return await bcrypt.hash(password, salt)
 }
-userSchema.statics.comparePassword = async (password, receivedPassword) => {
+userSchema.statics.comparePassword = async (password, receivedPassword) => { // comparar contraseña
     return await bcrypt.compare(password, receivedPassword)
 }
 export default mongoose.model('User', userSchema)
